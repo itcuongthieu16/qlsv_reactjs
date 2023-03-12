@@ -11,7 +11,12 @@ const StudentList = () => {
 
     const deleteStudent = (id) => {
         removeStudent(id);
-        setStudents(getListStudents());
+        const newStudents = getListStudents();
+        setStudents(newStudents);
+        setFilteredStudents(newStudents);
+        setSelectedStudentIds((prevIds) =>
+            prevIds.filter((selectedId) => selectedId !== id)
+        );
     };
 
     const columns = [
