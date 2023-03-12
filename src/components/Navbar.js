@@ -25,7 +25,7 @@ const Navbar2 = () => {
                     <Button
                         type="primary"
                         danger
-                        onClick={() => navigate("/employee-create")}
+                        onClick={() => navigate("/student-create")}
                     >
                         Quay lại
                     </Button>

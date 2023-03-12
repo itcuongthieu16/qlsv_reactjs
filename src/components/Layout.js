@@ -12,8 +12,8 @@ const Layout = () => {
             <div className="container">
                 <Routes>
                     <Route path="/" element={<EmployeeList />} />
-                    <Route path="/employee-create" element={<StudentForm />} />
-                    <Route path="/edit-employee/:id" element={<StudentForm />} />
+                    <Route path="/student-create" element={<StudentForm />} />
+                    <Route path="/edit-student/:id" element={<StudentForm />} />
                 </Routes>
             </div>
             <Footer />
