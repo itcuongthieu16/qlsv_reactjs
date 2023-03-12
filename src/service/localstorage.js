@@ -10,8 +10,34 @@ export const getListStudents = () => {
     return students;
 };
 
+// export const addStudent = (student) => {
+//     const students = getListStudents();
+//     students.push({ id: uuid, ...student });
+//     localStorage["students"] = JSON.stringify(students);
+//     console.log(student);
+// };
 export const addStudent = (student) => {
     const students = getListStudents();
+
+    // Kiểm tra trùng lặp mã số sinh viên
+    const isDuplicate = students.some((s) => s.masv === student.masv);
+    if (isDuplicate) {
+        alert("Mã số sinh viên đã tồn tại");
+        return;
+    }
+
+    // Kiểm tra xem người dùng đã nhập đầy đủ thông tin hay chưa
+    if (
+        !student.masv ||
+        !student.tensv ||
+        !student.ngaysinh ||
+        !student.gioitinh ||
+        !student.makhoa ||
+        !student.tenkhoa
+    ) {
+        alert("Vui lòng nhập đầy đủ thông tin");
+        return;
+    }
     students.push({ id: uuid, ...student });
     localStorage["students"] = JSON.stringify(students);
     console.log(student);
