@@ -2,6 +2,7 @@ import { Button, Checkbox, Modal, Table } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getListStudents, removeStudent } from "../service/localstorage";
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import Search from "./Search";
 
 const StudentList = () => {
@@ -134,9 +135,12 @@ const StudentList = () => {
                     </Button>
                 </div>
             )}
-            {
-                filteredStudents ? <Table columns={columns} dataSource={filteredStudents} /> : <Table columns={columns} dataSource={students} />
-            }
+            <Scrollbars style={{ height: 500 }}>
+
+                {
+                    filteredStudents ? <Table columns={columns} dataSource={filteredStudents} /> : <Table columns={columns} dataSource={students} />
+                }
+            </Scrollbars>
         </div>
     );
 };
