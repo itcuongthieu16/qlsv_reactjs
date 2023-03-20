@@ -55,9 +55,21 @@ export const getStudentById = (id) => {
     return student;
 };
 
+// export const editStudent = (id, newStudent) => {
+//     let students = getListStudents();
+//     students = students.filter((student) => student.id !== id);
+//     students.push(newStudent);
+//     localStorage["students"] = JSON.stringify(students);
+// };
+
 export const editStudent = (id, newStudent) => {
     let students = getListStudents();
-    students = students.filter((student) => student.id !== id);
-    students.push(newStudent);
+    students = students.map((student) => {
+        if (student.id === id) {
+            return newStudent;
+        } else {
+            return student;
+        }
+    });
     localStorage["students"] = JSON.stringify(students);
 };

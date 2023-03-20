@@ -9,6 +9,7 @@ const StudentList = () => {
     const navigate = useNavigate();
     const [students, setStudents] = useState([]);
     const [filteredStudents, setFilteredStudents] = useState([]);
+    const [selectedStudentIds, setSelectedStudentIds] = useState([]);
 
     const deleteStudent = (id) => {
         removeStudent(id);
@@ -85,8 +86,6 @@ const StudentList = () => {
         setFilteredStudents(getListStudents());
     }, []);
 
-    const [selectedStudentIds, setSelectedStudentIds] = useState([]);
-
     const handleCheckboxChange = (event, studentId) => {
         if (event.target.checked) {
             setSelectedStudentIds((prevIds) => [...prevIds, studentId]);
@@ -123,6 +122,9 @@ const StudentList = () => {
             );
         });
         setFilteredStudents(filtered);
+        if (searchValue === "") {
+            setFilteredStudents(students);
+        }
     };
 
     return (
@@ -137,9 +139,7 @@ const StudentList = () => {
             )}
             <Scrollbars style={{ height: 500 }}>
 
-                {
-                    filteredStudents ? <Table columns={columns} dataSource={filteredStudents} /> : <Table columns={columns} dataSource={students} />
-                }
+                <Table columns={columns} dataSource={filteredStudents} />
             </Scrollbars>
         </div>
     );

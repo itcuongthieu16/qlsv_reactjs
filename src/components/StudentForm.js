@@ -8,12 +8,13 @@ import { useForm } from "../hooks/useForm";
 import {
   addStudent,
   editStudent,
+  getListStudents,
   getStudentById
 } from "../service/localstorage";
 const { Option } = Select;
 
 const StudentForm = () => {
-  const notify = () => toast("Thành công!");
+  // const notify = () => toast("Thành công!");
   const navigate = useNavigate();
   const { id } = useParams();
   const { inputValues, handleInputChange, resetForm, setForm } = useForm({
@@ -32,25 +33,41 @@ const StudentForm = () => {
     }
   }, [id]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   id
-  //     ? editStudent(id, inputValues)
-  //     : addStudent({ id: uuid(), ...inputValues });
-
-  //   console.log(inputValues);
-  //   resetForm();
-  // };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { masv, tensv, ngaysinh, gioitinh, makhoa, tenkhoa } = inputValues;
+    const students = getListStudents();
+
+    // Kiểm tra trùng mã số sinh viên
+    const isDuplicate = students.some((s) => s.masv === masv && s.id !== id);
+    if (isDuplicate) {
+      toast.error("Mã số sinh viên đã tồn tại!");
+      return;
+    }
+
+    // Kiểm tra xem người dùng đã nhập đầy đủ thông tin hay chưa
+    if (!masv || !tensv || !ngaysinh || !gioitinh || !makhoa || !tenkhoa) {
+      toast.error("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
     const newStudent = { id: uuid(), ...inputValues };
     id ? editStudent(id, inputValues) : addStudent(newStudent);
     resetForm();
-    toast.success(`Student ${id ? "updated" : "added"} successfully!`);
-    navigate("/");
+    toast.success(`Sinh viên ${id ? "cập nhật" : "thêm"} thành công!`);
+
+    if (students.length > 0) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000); // Chuyển trang sau 3 giây
+    } else {
+      toast.error("Chưa có sinh viên được thêm vào!");
+    }
   };
+
+
+
   return (
     <div className="">
       <ToastContainer />
@@ -146,7 +163,7 @@ const StudentForm = () => {
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button
-              onClick={notify}
+              // onClick={notify}
               type="primary"
               danger
               htmlType="submit"
@@ -162,3 +179,5 @@ const StudentForm = () => {
 };
 
 export default StudentForm;
+
+

@@ -28,7 +28,7 @@ const Navbar2 = () => {
                         danger
                         onClick={() => navigate("/student-create")}
                     >
-                        Quay lại
+                        Quay lại Form
                     </Button>
                 </div>
             </Header>
