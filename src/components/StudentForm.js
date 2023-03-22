@@ -29,6 +29,7 @@ const StudentForm = () => {
   useEffect(() => {
     if (id) {
       const student = getStudentById(id);
+      // Hiển thị lên form
       setForm(student);
     }
   }, [id]);

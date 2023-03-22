@@ -11,6 +11,7 @@ const StudentList = () => {
     const [filteredStudents, setFilteredStudents] = useState([]);
     const [selectedStudentIds, setSelectedStudentIds] = useState([]);
 
+
     const deleteStudent = (id) => {
         removeStudent(id);
         const newStudents = getListStudents();
@@ -138,7 +139,6 @@ const StudentList = () => {
                 </div>
             )}
             <Scrollbars style={{ height: 500 }}>
-
                 <Table columns={columns} dataSource={filteredStudents} />
             </Scrollbars>
         </div>

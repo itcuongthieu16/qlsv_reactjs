@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Input, Table } from "antd";
+import { Input } from "antd";
 
 const Search = ({ searchData }) => {
-    const [search, setSearch] = useState("");
+    // const [search, setSearch] = useState("");
 
     const handleSearch = (value) => {
-        setSearch(value);
+        // setSearch(value);
         searchData(value);
     };
 

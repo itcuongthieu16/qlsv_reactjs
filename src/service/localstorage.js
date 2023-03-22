@@ -9,13 +9,6 @@ export const getListStudents = () => {
     students = JSON.parse(students);
     return students;
 };
-
-// export const addStudent = (student) => {
-//     const students = getListStudents();
-//     students.push({ id: uuid, ...student });
-//     localStorage["students"] = JSON.stringify(students);
-//     console.log(student);
-// };
 export const addStudent = (student) => {
     const students = getListStudents();
 
@@ -54,13 +47,6 @@ export const getStudentById = (id) => {
     const student = students.find((student) => student.id === id);
     return student;
 };
-
-// export const editStudent = (id, newStudent) => {
-//     let students = getListStudents();
-//     students = students.filter((student) => student.id !== id);
-//     students.push(newStudent);
-//     localStorage["students"] = JSON.stringify(students);
-// };
 
 export const editStudent = (id, newStudent) => {
     let students = getListStudents();
